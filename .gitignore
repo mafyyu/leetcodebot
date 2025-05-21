@@ -1,4 +1,5 @@
 # 環境変数ファイル
 .env
 
+config.json
 node_modules/
