@@ -38,7 +38,7 @@ export const getQuestionDetail = async (titleSlug) => {
 	});
 
 	const data = await res.json();
-	return JSON.stringify(data);
+	return data;
 
 	// fetchメソッドでHTTPリクエストを送る
 };
