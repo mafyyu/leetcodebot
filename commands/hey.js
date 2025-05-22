@@ -4,8 +4,8 @@ import { SlashCommandBuilder } from 'discord.js';
 
 const questiontitle = await todayQuestion();
 const titleSlug = questiontitle.toLowerCase().replaceAll((' '), ('-')).replaceAll(/"/g, '');
-const questinDetail = await getQuestionDetail(titleSlug);
-console.log(questinDetail);
+const questionDetail = await getQuestionDetail(titleSlug);
+
 
 
 const data = new SlashCommandBuilder().setName('today').setDescription('コマンドを入力するとDailyQuestionが表示されます。');

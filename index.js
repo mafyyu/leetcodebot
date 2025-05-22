@@ -1,6 +1,6 @@
 import { Client, Events, GatewayIntentBits } from 'discord.js';
 import config from './config.json' assert {type:'json'};
-import heyFile from './commands/hey.js'
+import returntodayFile from './commands/returntoday.js'
 
 const { token } = config;
 
@@ -17,9 +17,9 @@ client.on(Events.InteractionCreate, async interaction => {
     if (!interaction.isChatInputCommand()) return;
 
     // heyコマンドに対する処理
-    if (interaction.commandName === heyFile.data.name) {
+    if (interaction.commandName === returntodayFile.data.name) {
         try {
-            await heyFile.execute(interaction);
+            await returntodayFile.execute(interaction);
         } catch (error) {
             console.error(error);
             if (interaction.replied || interaction.deferred) {

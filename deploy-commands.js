@@ -1,11 +1,12 @@
 import { REST, Routes } from 'discord.js';
 import heyFile from './commands/hey.js';
-import config from './config.json';
+import config from './config.json' assert { type: 'json' };
+import returntodayFile from './commands/returntoday.js';
 
 const { applicationId, guidId, token } = config;
 
 // 登録コマンドを呼び出してリスト形式で登録
-const commands = [heyFile.data.toJSON()];
+const commands = [returntodayFile.data.toJSON()];
 
 // DiscordのAPIには現在最新のversion10を指定
 const rest = new REST({ version: '10' }).setToken(token);
