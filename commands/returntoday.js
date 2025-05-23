@@ -45,7 +45,10 @@ async function execute(interaction){
         .setTitle(`${questiontitle.replaceAll(/"/g,"")}`)
         .setURL(`https://leetcode.com/problems/${titleSlug.replaceAll(/'/g,'')}/description/?envType=daily-question&envId=${dailyDay}`)
         .setDescription(`${questionDetail.data.question.questionId},${questionDetail.data.question.difficulty}`)
-        .addFields({ name: 'contents', value: `${text.slice(0,f)+text.slice(e)}`, inline: true })
+        .addFields(
+            { name: 'Contents', value: `${text.slice(0,f)}`, inline: true },
+            { name : 'Constraints', value: `${text.slice(e)}`, inline: true }
+        )
         .setTimestamp()
 
     await interaction.reply({ embeds: [embed] });
