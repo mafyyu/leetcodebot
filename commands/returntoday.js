@@ -33,11 +33,6 @@ async function execute(interaction) {
 	const f = text.indexOf('Example');
 	const e = text.indexOf('Constraints');
 
-	console.log(text.slice(0, f) + text.slice(e));
-
-
-	// console.log(typeof(text.indexOf("Example")));
-	// console.log(text.splice(text.indexOf("Example"),text.indexOf("Constraints")));
 
 	const embed = new EmbedBuilder()
 
@@ -49,7 +44,7 @@ async function execute(interaction) {
 			{ name: 'Contents', value: `${text.slice(0, f)}`, inline: true },
 			{ name : 'Constraints', value: `${text.slice(e)}`, inline: true },
 		)
-		.setTimestamp();
+		// .setTimestamp();
 
 	await interaction.reply({ embeds: [embed] });
 }
