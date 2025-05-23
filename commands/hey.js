@@ -7,7 +7,6 @@ const titleSlug = questiontitle.toLowerCase().replaceAll((' '), ('-')).replaceAl
 const questionDetail = await getQuestionDetail(titleSlug);
 
 
-
 const data = new SlashCommandBuilder().setName('today').setDescription('コマンドを入力するとDailyQuestionが表示されます。');
 const execute = async function(interaction) {
 	await interaction.reply(questiontitle);
