@@ -2,8 +2,7 @@ import { getQuestionDetail } from '../graphql/getQuestionDetail.js';
 import { todayQuestion } from '../graphql/todayQuestion.js';
 import { EmbedBuilder, SlashCommandBuilder } from 'discord.js';
 import { compile } from 'html-to-text';
-import dayjs from 'dayjs';
-import utc from 'dayjs/plugin/utc.js';
+import { returnUrl } from '../utils/returnUrl.js';
 
 const data = new SlashCommandBuilder()
 	.setName('today')
@@ -14,11 +13,7 @@ async function execute(interaction) {
 	const titleSlug = questiontitle.toLowerCase().replaceAll((' '), ('-')).replaceAll(/"/g, '');
 	const questionDetail = await getQuestionDetail(titleSlug);
 
-
-	// leetcodeの変更時間に合わせてる
-	dayjs.extend(utc);
-	const now = dayjs().utc(); // 9:00変更だからイギリス時間にしている
-	const dailyDay = now.format('YYYY-MM-DD');
+    const url = await returnUrl();
 
 	const options = {
 		selectors:[
@@ -38,7 +33,7 @@ async function execute(interaction) {
 
 		.setColor(0x0099FF)
 		.setTitle(`${questiontitle.replaceAll(/"/g, '')}`)
-		.setURL(`https://leetcode.com/problems/${titleSlug.replaceAll(/'/g, '')}/description/?envType=daily-question&envId=${dailyDay}`)
+		.setURL(url)
 		.setDescription(`${questionDetail.data.question.questionId},${questionDetail.data.question.difficulty}`)
 		.addFields(
 			{ name: 'Contents', value: `${text.slice(0, f)}`, inline: true },
