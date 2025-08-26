@@ -10,7 +10,7 @@ const client = new Client({intents: [GatewayIntentBits.Guilds]});
 
 client.once(Events.ClientReady,readyClient=>{
     console.log(`Ready! Logged in as ${readyClient.user.tag}`);
-    cron.schedule('0 17 21 * * *', async () => {
+    cron.schedule('0 0 9 * * *', async () => {
         const guild = await client.guilds.fetch(config.guidId);
         await event(guild);
     });
