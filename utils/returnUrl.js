@@ -1,9 +1,11 @@
-import { todayQuestion } from '../graphql/todayQuestion.js';
+import TodayQuestionService from '../graphql/services/todayQuestionService.js';
 import dayjs from 'dayjs';
 import utc from 'dayjs/plugin/utc.js';
 
+
 export async function returnUrl() {
-	const questiontitle = await todayQuestion();
+	const todayQuestionService = new TodayQuestionService();
+	const questiontitle = await todayQuestionService.getTodayQuestion();
 	const titleSlug = questiontitle.toLowerCase().replaceAll((' '), ('-')).replaceAll(/"/g, '');
 
 	// leetcodeの変更時間に合わせてる

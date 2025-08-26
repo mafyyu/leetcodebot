@@ -1,17 +1,17 @@
 import { Client, Events, GatewayIntentBits } from 'discord.js';
-import config from './config.json' assert {type:'json'};
+import dotenv from 'dotenv';
+dotenv.config();
 import returntodayFile from './commands/returntoday.js'
 import event from './events/event.js';
 import cron from 'node-cron';
 
-const { token } = config;
 
 const client = new Client({intents: [GatewayIntentBits.Guilds]});
 
 client.once(Events.ClientReady,readyClient=>{
     console.log(`Ready! Logged in as ${readyClient.user.tag}`);
     cron.schedule('0 0 9 * * *', async () => {
-        const guild = await client.guilds.fetch(config.guidId);
+        const guild = await client.guilds.fetch(process.env.GUID_ID);
         await event(guild);
     });
 });
@@ -39,4 +39,4 @@ client.on(Events.InteractionCreate, async interaction => {
     }
 });
 
-client.login(token);
+client.login(process.env.TOKEN);
