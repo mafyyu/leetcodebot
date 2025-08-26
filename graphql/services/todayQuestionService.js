@@ -16,7 +16,7 @@ class TodayQuestionService {
       }
       
       const question = result.data.activeDailyCodingChallengeQuestion.question;
-      return question;
+      return question.title;
     } catch (error) {
       console.error('Failed to get today question:', error);
       throw error;

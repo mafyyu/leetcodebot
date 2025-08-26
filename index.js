@@ -1,6 +1,8 @@
 import { Client, Events, GatewayIntentBits } from 'discord.js';
 import config from './config.json' assert {type:'json'};
 import returntodayFile from './commands/returntoday.js'
+import event from './events/event.js';
+import cron from 'node-cron';
 
 const { token } = config;
 
@@ -8,6 +10,10 @@ const client = new Client({intents: [GatewayIntentBits.Guilds]});
 
 client.once(Events.ClientReady,readyClient=>{
     console.log(`Ready! Logged in as ${readyClient.user.tag}`);
+    cron.schedule('0 17 21 * * *', async () => {
+        const guild = await client.guilds.fetch(config.guidId);
+        await event(guild);
+    });
 });
 
 client.on(Events.InteractionCreate, async interaction => {
@@ -16,7 +22,7 @@ client.on(Events.InteractionCreate, async interaction => {
     // コマンドにスラッシュが使われているかどうかはisChatInputCommand()で判断しています
     if (!interaction.isChatInputCommand()) return;
 
-    // heyコマンドに対する処理
+
     if (interaction.commandName === returntodayFile.data.name) {
         try {
             await returntodayFile.execute(interaction);
