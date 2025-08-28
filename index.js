@@ -2,8 +2,6 @@ import { Client, Events, GatewayIntentBits } from 'discord.js';
 import dotenv from 'dotenv';
 dotenv.config();
 import returntodayFile from './commands/returntoday.js'
-import event from './events/event.js';
-import cron from 'node-cron';
 
 
 const client = new Client({intents: [GatewayIntentBits.Guilds]});
